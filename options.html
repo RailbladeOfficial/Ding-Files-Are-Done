@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ding Files Are Done</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="card">
+    <header>
+      <img src="icons/icon48.png" alt="" class="logo">
+      <div>
+        <h1>Ding Files Are Done</h1>
+        <p class="sub">System notifications when a download finishes</p>
+      </div>
+    </header>
+
+    <div class="row">
+      <label class="switch">
+        <input type="checkbox" id="enabled">
+        <span class="slider"></span>
+      </label>
+      <div>
+        <div class="row-title">Enable notifications</div>
+        <div class="row-desc">Turn this off to pause all download notifications.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <label class="switch">
+        <input type="checkbox" id="soundEffect">
+        <span class="slider"></span>
+      </label>
+      <div>
+        <div class="row-title">Play a sound effect instead</div>
+        <div class="row-desc">Shows the notification silently and plays your chosen sound instead of Windows' default notification sound.</div>
+      </div>
+    </div>
+
+    <div class="row sound-picker" id="soundPickerRow">
+      <div class="field">
+        <label for="soundSelect">Sound effect</label>
+        <div class="sound-select-line">
+          <select id="soundSelect">
+            <optgroup label="Standard" id="builtinGroup"></optgroup>
+            <optgroup label="Special" id="customGroup"></optgroup>
+            <optgroup label="Uploaded" id="uploadedGroup"></optgroup>
+          </select>
+          <button type="button" id="previewBtn" class="preview-btn">▶ Preview</button>
+        </div>
+      </div>
+
+      <div class="field volume-field">
+        <label for="volumeSlider">Volume</label>
+        <div class="volume-line">
+          <input type="range" id="volumeSlider" min="0" max="100" step="5">
+          <span id="volumeValue" class="volume-value">50%</span>
+        </div>
+      </div>
+
+      <div class="upload-row">
+        <input type="file" id="uploadInput" accept="audio/*" hidden>
+        <label for="uploadInput" class="upload-btn">⬆ Upload your own sound</label>
+        <button type="button" id="removeUploadBtn" class="remove-upload-btn" hidden title="Remove uploaded sound">✕</button>
+      </div>
+      <div class="row-desc" id="uploadStatus"></div>
+    </div>
+
+    <div class="row">
+      <label class="switch">
+        <input type="checkbox" id="hideDownloadShelf">
+        <span class="slider"></span>
+      </label>
+      <div>
+        <div class="row-title">Hide Chrome's download shelf/bubble</div>
+        <div class="row-desc">Replaces the built-in download bar/bubble — no separate extension needed for this.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="minSize">Minimum file size</label>
+        <div class="input-suffix">
+          <input type="number" id="minSize" min="0" step="1">
+          <span>KB</span>
+        </div>
+      </div>
+      <div class="row-desc">Skip notifications for files smaller than this. Set to 0 to notify on every download.</div>
+    </div>
+
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+Ding Files Are Done — developer notes
+Copyright (C) 2026 Railblade
+======================================
+
+These notes cover the two maintenance tasks that involve more than editing a single file: regenerating icons and bundling "Special" sounds. End users never need any of this — everything here is for whoever maintains the code.
+
+
+1. REGENERATING / ADDING ICONS (make_icons.py)
+----------------------------------------------
+
+Requirements: Python 3 with the Pillow library.
+
+    pip install pillow
+    python3 make_icons.py
+
+Run it from the extension's root folder. It regenerates, in place:
+
+    file-icons/<ext>.png            one badge per known file extension
+    file-icons/_category_<cat>.png  fallback badge per broad category
+    icons/icon16/48/128.png         the extension's own icon
+    icons/btn-open.png              notification "Open file" button icon
+    icons/btn-folder.png            notification "Show in folder" button icon
+
+Output is deterministic — running it without changing the script produces
+pixel-identical files, so it's safe to re-run any time.
+
+To add a badge for a NEW file extension:
+
+    1. Add the extension to EXT_CATEGORY in make_icons.py, mapped to one of
+       the existing categories (or add a new category + colors to
+       CATEGORY_COLORS in the same file).
+    2. Add the same extension string to KNOWN_EXTENSIONS in background.js —
+       this is what makes the extension actually use the new badge. If you
+       added a new category, mirror its colors in CATEGORY_COLORS in
+       background.js too (used for runtime-drawn fallback badges).
+    3. Run:  python3 make_icons.py
+    4. Reload the extension at chrome://extensions (or brave://extensions).
+
+Extensions NOT in the list still work — the extension draws a fallback
+badge at runtime, colored by the file's MIME-type category and labeled
+with the unknown extension. Pre-rendered badges just look a bit cleaner.
+
+
+2. BUNDLING "SPECIAL" SOUNDS MANUALLY
+-------------------------------------
+
+"Special" sounds are audio files that ship inside the extension and appear
+in the Sound effect dropdown for every user (unlike a user's own upload,
+which lives only in their browser storage).
+
+    1. Drop the audio file (wav/mp3/ogg) into  sounds/custom/
+       Keep it short — it plays on every download.
+    2. Add an entry to the SPECIAL_SOUNDS array near the top of options.js:
+
+           const SPECIAL_SOUNDS = [
+             { id: "success", label: "Success!", file: "success.wav" },
+             { id: "mynew",   label: "My New Sound", file: "mynew.wav" }
+           ];
+
+       id    = short unique identifier (letters/numbers/dashes)
+       label = the text shown in the dropdown
+       file  = the filename inside sounds/custom/
+    3. Record where the sound came from and its license in ATTRIBUTIONS.md.
+       Anything bundled here is redistributed to every user AND lives in a
+       public repo, so only include audio you have the rights to share.
+    4. Reload the extension. The sound appears under the "Special" group.
+
+The ten "Standard" sounds are synthesized at runtime with the Web Audio
+API (see offscreen.js) — they have no files and no licensing concerns.
