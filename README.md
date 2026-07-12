@@ -8,7 +8,7 @@ to miss and easier to hate. Each notification has a file-type badge icon and
 **Open file** / **Show in folder** buttons, with an optional custom sound
 effect instead of the default Windows notification sound.
 
-<a href="./screenshots/main.png" target="_blank"><img src="./screenshots/main.png" width="100%"></a>
+<p align="center"><a href="./screenshots/main.png" target="_blank"><img src="./screenshots/main.png" width="50%"></a></p>
 
 ## Features
 
