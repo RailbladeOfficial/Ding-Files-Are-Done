@@ -35,9 +35,9 @@ effect instead of the default Windows notification sound.
 **From source (unpacked):**
 
 1. Download or clone this repository.
-  a. Click the green "Code" button at the top, and choose Download ZIP from the dropdown menu.
-  b. Alternatively, click Released on the right side and download the released ZIP file from there.
-  c. Unzip the file so you have just the base folder, with all contents inside it, and store the folder somewhere safe (e.g. Documents).
+  - Click the green "Code" button at the top, and choose Download ZIP from the dropdown menu.
+  - Alternatively, click Releases on the right side and download the released ZIP file from there.
+  - Unzip the file so you have just the base folder, with all contents inside it, and store the folder somewhere safe (e.g. Documents).
 2. Open `chrome://extensions` (or `brave://extensions`).
 3. Enable **Developer mode** (top right).
 4. Click **Load unpacked** and select the extension's folder.
